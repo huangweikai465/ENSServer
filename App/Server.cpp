@@ -19,8 +19,8 @@ void LogErrorHook(std::string _szLog)
 
 void PrintUsage(void)
 {
-	cout << "Usage: EasyNetServiceServer [-u (udpport)]" << endl;
-	cout << "such as : \"EasyNetServiceClient -u 5678\"" << endl;
+    cout << "Usage: ensserver [-u (udpport)]" << endl;
+    cout << "such as : \"ensserver -u 5678\"" << endl;
 	cout << "default udpport is " << g_uUdpPort << endl;
 }
 
@@ -56,6 +56,10 @@ int main(int argc, char* argv[])
         Log::m_gErrHook = LogErrorHook;
         if(AnalyzeParam(argc, argv) == 0)
 		{
+#if defined(LINUX)
+            //在Linux上将配置文件放到etc目录下
+            FileOpt::SetPath(std::string("/etc/")+std::string(CONFIGDIR)+"/");
+#endif
 			EasyNetServiceServer ecs(g_uUdpPort,DEFAULTCFGFILE);
 			printf("Press 'q' and RNTERTo Exit\r\n");
 			while(getchar() != 'q')

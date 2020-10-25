@@ -16,6 +16,8 @@
 #define ACCESS access
 #endif
 
+std::string FileOpt::c_szPath = GetConfigPath();
+
 void FileOpt::ReadFile(void)
 {
 	FILE* fp;
@@ -107,9 +109,15 @@ std::string FileOpt::GetConfigPath()
 #endif
 }
 
+
+void FileOpt::SetPath(std::string _szPath)
+{
+    c_szPath = _szPath;
+}
+
 FileOpt::FileOpt(std::string _szFileName,std::string szDefaultContent)
-    :m_szConfigPath(GetConfigPath()),
-      m_szFileName(_szFileName)
+      :m_szFileName(_szFileName),
+      m_szConfigPath(c_szPath)
 {
     std::string szFile = m_szConfigPath + m_szFileName;
     int sAccessible = IsAccessible(szFile);

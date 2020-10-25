@@ -2,25 +2,24 @@
 #include "stdio.h"
 #include "string"
 
-#if defined(WIN32)
 #define CONFIGDIR "ens"
-#else
-#define CONFIGDIR ".ens"
-#endif
 
 class FileOpt
 {
 private:
-    const std::string m_szConfigPath;
+    static std::string c_szPath;
 	const std::string m_szFileName;
-	std::string m_szFileContent;
+    const std::string m_szConfigPath;
+    std::string m_szFileContent;
 
-	void ReadFile(void);
-    bool IsAccessible(std::string _szFileOrFir);   //判断文件是否存在以及是否可访问
+    static bool IsAccessible(std::string _szFileOrFir);   //判断文件是否存在以及是否可访问
+    static bool CreateDefaultDirectory(std::string _szDirName);
+    static std::string GetConfigPath(void);
+
+    void ReadFile(void);
     bool CreateCfgFile(std::string _szFilePath,std::string _szFileName,std::string _szDefaultText = "");
-    bool CreateDefaultDirectory(std::string _szDirName);
-    std::string GetConfigPath(void);
 public:
+    static void SetPath(std::string _szPath);
     FileOpt(std::string _szFileName,std::string _szDefaultContent = "");
 	~FileOpt();
 	

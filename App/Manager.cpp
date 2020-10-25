@@ -9,7 +9,7 @@ ServiceNode oSrvNode;
 
 void PrintUasge(void)
 {
-    printf("Usage:  EasyNetServiceManager [cmd] (...)\r\n");
+    printf("Usage:  ensmanager [cmd] (...)\r\n");
     printf("cmd:\r\n");
     printf("\tls:list current service config\r\n");
     printf("\trm [-p port] or [-n name]:remove service accordding to port or name\r\n");
