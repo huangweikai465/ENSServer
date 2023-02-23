@@ -4,6 +4,12 @@
 
 #define CONFIGDIR "ens"
 
+#if defined(WIN32)
+#define DIRDIV "\\"
+#else
+#define DIRDIV "/"
+#endif
+
 class FileOpt
 {
 private:
@@ -13,7 +19,7 @@ private:
     std::string m_szFileContent;
 
     static bool IsAccessible(std::string _szFileOrFir);   //判断文件是否存在以及是否可访问
-    static bool CreateDefaultDirectory(std::string _szDirName);
+    static bool CreateDirectory(std::string _szDirName);
     static std::string GetConfigPath(void);
 
     void ReadFile(void);
